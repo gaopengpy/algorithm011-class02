@@ -11,8 +11,34 @@
 4.队列是一种FIFO（先进先出）的数据结构,在 FIFO 队列中，所有的新元素都插入队列的末尾，移除元素从队列头部移除。
 
 
-在实际工程应用中较少使用Stack(栈)，使用比较多的是Deque(双端队列)，即可作为栈，也可以作为队列
-作为栈，使用Push方法入栈，使用Pop方法出栈
+在实际工程应用中较少使用Stack(栈)，使用比较多的是Deque(双端队列)，即可作为栈，也可以作为队列。
+
+作为栈，使用Push方法入栈，使用Pop方法出栈。
+
 作为队列，尽量避免使用add()和remove()方法，而是要使用offer()来加入元素，使用poll()来获取并移出元素。
+
 它们的优点是通过返回值可以判断成功与否，add()和remove()方法在失败的时候会抛出异常。
 
+
+
+用add first或add last这套新的API改写Deque的代码:
+
+		Deque<String> deque = new LinkedList<String>();
+
+		deque.addFirst("a");
+		deque.addFirst("b");
+		deque.addFirst("c");
+		System.out.println(deque);
+
+		String str = deque.peek();
+		System.out.println(str);
+		System.out.println(deque);
+
+		while (deque.size() > 0) {
+			System.out.println(deque.removeFirst());
+		}
+
+		System.out.println(deque);
+	
+
+分析Queue和Priority Queue的源码:
