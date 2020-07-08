@@ -1,33 +1,27 @@
 class Solution {
 
-    public List<List<Integer>> output = new ArrayList<>();
+	public List<List<Integer>> permute(int[] nums) {
 
-    public List<List<Integer>> permute(int[] nums) {
+		List<List<Integer>> list = new ArrayList<>();
+		backtrack(list, new ArrayList<Integer>(), nums);
+		return list;
+	}
 
-        int[] visited = new int[nums.length];
-        backtrack(new ArrayList<>(), nums, visited);
-        return output;
+	public void backtrack(List<List<Integer>> list, List<Integer> tempList, int[] nums) {
 
-    }
-
-    private void backtrack(List<Integer> temp, int[] nums, int[] visited) {
-        if (temp.size() == nums.length) {
-        output.add(new ArrayList<>(temp));
-        return;
+		if (tempList.size() == nums.length) {
+            list.add(new ArrayList<>(tempList)); // 符合条件的加入进去
+			return;
+		}else {
+          for (int i = 0; i < nums.length; i++) {
+            if (tempList.contains(nums[i])) {
+              continue;
+            }
+            tempList.add(nums[i]);
+            backtrack(list,tempList,nums);
+            tempList.remove(tempList.size() - 1);
+          }
         }
-
-        for (int i = 0; i < nums.length; i++) {
-        if (visited[i] == 1) {
-            continue;
-        }
-        visited[i] = 1;
-        temp.add(nums[i]);
-        backtrack(temp, nums, visited);
-        visited[i] = 0;
-        temp.remove(temp.size() - 1);
-        }
-    }
+	}
+    
 }
-
-
-
